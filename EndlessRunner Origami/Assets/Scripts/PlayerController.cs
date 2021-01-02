@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Broom;
     public int PointCount;
     public int PointRequireForLevel2, PointRequireForLevel3;
-    private bool takeoff = false;
+    private bool takeoff = false,statechanged=false;
     private void Awake()
     {
         anim = GetComponent<Animator>();    
@@ -173,9 +173,10 @@ public class PlayerController : MonoBehaviour
         if (PointCount >=PointRequireForLevel2 && PointCount<PointRequireForLevel3)
         {
             Stage = 2;
-        }else if(PointCount>PointRequireForLevel2 && PointCount >= PointRequireForLevel3)
+        }else if(PointCount>=PointRequireForLevel3 && statechanged==false)
         {
             StartCoroutine(LastStage());
+            
         }
     }
 
@@ -192,6 +193,7 @@ public class PlayerController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.2f);
             Stage = 3;
+            statechanged = true;
         }
     }
 }

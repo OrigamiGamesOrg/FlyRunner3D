@@ -58,13 +58,14 @@
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\WorldSkies\Demo\Scripts\LookCamera.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Spawner2.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\WorldSkies\Demo\Scripts\SkyboxChanger.cs" />
     <Compile Include="Assets\Scripts\Camera.cs" />
     <Compile Include="Assets\Scripts\Road.cs" />
-    <Compile Include="Assets\Spawner2.cs" />
+    <Compile Include="Assets\Scripts\UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Models &amp; Imports\BrokenVector\LowPolyShaders\Shaders\LowPolyUnlitShader.shader" />
