@@ -825,6 +825,7 @@ MonoBehaviour:
   MaxDelay: 6
   HalfLength: 15
   coin: {fileID: 7906186951961632889, guid: 1de4038a6b87b7f43b0588552c6aad14, type: 3}
+  flyObstacleDelay: 0.3
 --- !u!4 &1279030770
 Transform:
   m_ObjectHideFlags: 0

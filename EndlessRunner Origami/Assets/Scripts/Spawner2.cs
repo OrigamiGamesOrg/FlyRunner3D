@@ -11,7 +11,8 @@ public class Spawner2 : MonoBehaviour
     private GameObject player;
     private float Spawnspeed;
     public GameObject coin;
-    private bool stage3encountered = false;
+    private float timer=0f;
+    public float flyObstacleDelay=1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,15 +27,29 @@ public class Spawner2 : MonoBehaviour
     void Update()
     {
         Spawnspeed = player.GetComponent<PlayerController>().speed.z;
-        if (stage3encountered == false)
-        {
-            if (player.GetComponent<PlayerController>().Stage == 3)
+        
+       if (player.GetComponent<PlayerController>().Stage == 3)
+       {
+            if (timer > flyObstacleDelay)
             {
-                
-                 StartCoroutine(Wait2());
-              
+                int rand = Random.Range(0, FlyObstacle.Length);
+                int rand2 = Random.Range(0, 15);
+                if (rand2 >= 0 && rand2 < 11)
+                {
+                    GameObject go = Instantiate(FlyObstacle[rand], new Vector3((Lanes[Random.Range(0, Lanes.Length)]).transform.position.x, 2f, player.transform.position.z + HalfLength), Quaternion.Euler(0, 0, 0));
+                    Destroy(go, 3f);
+                    timer = 0;
+                }else if (rand2 >= 11)
+                {
+                    GameObject coinsprefab= Instantiate(coin, new Vector3(Lanes[Random.Range(0, Lanes.Length)].transform.position.x, 2.17f, player.transform.position.z + HalfLength), Quaternion.identity);
+                    Destroy(coinsprefab, 3f);
+                    timer = 0;
+                }
             }
-        }
+            timer += Time.deltaTime;
+              
+       }
+        
 
     }
 
@@ -61,24 +76,5 @@ public class Spawner2 : MonoBehaviour
         StartCoroutine(GenerateObstacles());
     }
 
-    IEnumerator GenerateFlyObstacles()
-    {
-        float timer = 5f;
-        yield return new WaitForSeconds(timer);
-        CreateFlyObstacles(player.transform.position.z + HalfLength);
-        StartCoroutine("GenerateFlyObstacles");
-    }
-    void CreateFlyObstacles(float zpos)
-    {
-        int Randomnumber = Random.Range(0, 20);
-        if (Randomnumber >= 0 && Randomnumber < 15)
-            Instantiate(FlyObstacle[Random.Range(0, obstacle.Length)], new Vector3(Lanes[Random.Range(0, Lanes.Length)].transform.position.x, 2f, zpos), Quaternion.Euler(0f, 0f, 0f));
-        if (Randomnumber >= 15 && Randomnumber < 20)
-            Instantiate(coin, new Vector3(Lanes[Random.Range(0, Lanes.Length)].transform.position.x,2f, zpos), Quaternion.identity);
-    }
-    IEnumerator Wait2()
-    {
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(GenerateFlyObstacles());
-    }
+  
 }
